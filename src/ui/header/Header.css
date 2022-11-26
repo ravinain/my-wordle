@@ -1,0 +1,14 @@
+.app-header {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.6rem;
+    width: 100%;
+}
+
+.app-header .title {
+    flex-grow: 4;
+    text-align: center;
+}

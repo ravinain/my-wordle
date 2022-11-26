@@ -1,0 +1,24 @@
+.game-keyboard {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-keyboard .keyboard-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0.5rem;
+}
+
+.game-keyboard .keyboard-row .keyboard-key {
+    background-color: black;
+    color: white;
+    flex-grow: 1;
+    padding: 1rem;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.keyboard-key:hover {
+    opacity: 70%;
+}
