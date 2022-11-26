@@ -4,6 +4,7 @@ import { GameKeyBoard } from './ui/game-keyboard/GameKeyboard';
 import { Header } from './ui/header/Header';
 
 function App() {
+
   return (
     <div className="app">
       <div className="container">

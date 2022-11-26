@@ -6,19 +6,21 @@
 .game-keyboard .keyboard-row {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     margin: 0.5rem;
 }
 
 .game-keyboard .keyboard-row .keyboard-key {
-    background-color: black;
+    margin: 0.2rem;
+    background-color: #666666;
     color: white;
-    flex-grow: 1;
+    min-width: 1rem;
     padding: 1rem;
     cursor: pointer;
     border: 1px solid white;
+    border-radius: 0.3rem;
 }
 
 .keyboard-key:hover {
-    opacity: 70%;
+    opacity: 50%;
 }

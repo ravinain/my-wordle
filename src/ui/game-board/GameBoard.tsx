@@ -1,4 +1,4 @@
-import { GameCell } from "../game-cell/GameCell";
+import './GameBoard.css';
 import { GameRow } from "../game-row/GameRow";
 
 const NUMBER_OF_ATTEMPTS = 6;
