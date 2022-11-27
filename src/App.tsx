@@ -8,6 +8,10 @@ function App() {
   const [currentValue, setCurrentValue] = useState("");
 
   const handleKeyDownEvent = (event: any): void => {
+    setCurrentValue("");
+  };
+
+  const handleKeyUpEvent = (event: any): void => {
     const keyCode = event.keyCode;
     switch(keyCode) {
       case 13:
@@ -24,9 +28,11 @@ function App() {
   useEffect(() => {
     
     document.body.addEventListener('keydown', handleKeyDownEvent);
+    document.body.addEventListener('keyup', handleKeyUpEvent);
 
     return () => {
       document.body.removeEventListener('keydown', handleKeyDownEvent);
+      document.body.removeEventListener('keyup', handleKeyUpEvent);
     }
   }, []);
 

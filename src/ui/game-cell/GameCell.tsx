@@ -2,11 +2,11 @@ import './GameCell.css';
 import { CellTypeProps } from "../../types/CellType";
 
 export const GameCell = (props: CellTypeProps): JSX.Element => {
-    const {value} = props;
+    const {data} = props;
 
     return (
         <div className="game-cell">
-            {value}
+            {data.value}
         </div>
     );
 };
