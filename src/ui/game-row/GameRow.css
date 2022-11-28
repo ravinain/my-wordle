@@ -5,7 +5,23 @@
 }
 
 .game-row .game-cell {
-    height: 1.5rem;
+    height: 2.2rem;
     border: 0.5px solid grey;
     margin: 0.2rem;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.game-row.invalid {
+    animation: h-shaking 0.35s 2;
+}
+
+@keyframes h-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) }
 }

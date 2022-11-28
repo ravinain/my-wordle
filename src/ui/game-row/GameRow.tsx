@@ -1,13 +1,25 @@
 import './GameRow.css';
 import { GameCell } from "../game-cell/GameCell";
+import { GameRowProps } from '../../types/GameRowType';
+import { WORD_SIZE } from '../../Constant';
 
-const WORD_SIZE = 5;
+export const GameRow = (props: GameRowProps): JSX.Element => {
+    const {rowData, shake} = props;
 
-export const GameRow = (): JSX.Element => {
+    const getRowClass = (): string => {
+        const classes = ["game-row"];
+
+        if (shake) {
+            classes.push("invalid");
+        }
+
+        return classes.join(" ");
+    };
+
     return (
-        <div className="game-row">
+        <div className={getRowClass()}>
             {
-                [...Array(WORD_SIZE).keys()].map(w => <GameCell value="" />)
+                [...Array(WORD_SIZE).keys()].map(w => <GameCell data={rowData[w]} />)
             }
         </div>
     );

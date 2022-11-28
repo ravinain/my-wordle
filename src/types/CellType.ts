@@ -1,7 +1,9 @@
 export type CellTypeProps = {
-    value: string;
+    data: CellData;
 };
 
-export type CellType = {
-
+export type CellData = {
+    value: string;
+    valid?: boolean;
+    partialValid?: boolean;
 };

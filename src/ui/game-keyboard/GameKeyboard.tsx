@@ -1,3 +1,4 @@
+import { GameKeyBoardProps } from '../../types/KeyboardType';
 import './GameKeyboard.css'
 import { KeyboardKey } from "./KeyboardKey";
 
@@ -7,10 +8,11 @@ const KEYBOARD_ROWS = [
     ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DEL"]
 ];
 
-export const GameKeyBoard = (): JSX.Element => {
+export const GameKeyBoard = (props: GameKeyBoardProps): JSX.Element => {
+    const { handleOnClick } = props;
 
     const handleOnKeyClick = (value: string): void => {
-        console.log("Clicked: ", value);
+        handleOnClick(value);
     };
 
     const buildKeyboard = (): JSX.Element[] => {
