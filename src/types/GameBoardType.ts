@@ -1,7 +1,10 @@
 import { GameRowData } from "./GameRowType";
 
 export type GameBoardProps = {
-    value: string;
+    data: {
+        value: string;
+        shake?: boolean;
+    };
 };
 
 export type GameBoardServiceType = {
