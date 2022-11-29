@@ -16,6 +16,7 @@ export type GameBoardServiceType = {
     getNextRowIndex: (row: number) => number;
     updateBoardData: (currentData: GameRowData[], currentGridIndex:GridIndex, value: string) => GameRowData[];
     updateActiveIndex: (currentActiveIndex: GridIndex, value: string) => GridIndex;
+    updateRowData: (currentData: GameRowData[], newRowData: GameRowData, row: number) => GameRowData[];
 }
 
 export type GridIndex = {
