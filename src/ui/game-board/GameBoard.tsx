@@ -12,7 +12,7 @@ const boardService: GameBoardServiceType = GameBoardService();
 const validationService: ValidationServiceType = ValidationService();
 
 export const GameBoard = (props: GameBoardProps): JSX.Element => {
-    const {data} = props;
+    const {data, onRowChange} = props;
     const [currentBoardData, setCurrentBoardData] = useState(boardService.getInitialData());
     const [activeGridIndex, setActiveGridIndex] = useState(boardService.getStartGridIndex());
     const {row} = activeGridIndex;
@@ -30,7 +30,20 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
     const validateAndUpdate = (newValue: string): void => {
         const currentRow = currentBoardData[row];
         if (validationService.shouldValidate(newValue, activeGridIndex, currentRow)) {
-            if (validationService.validate(currentRow)) {                
+            if (validationService.validate(currentRow)) {
+                const newKeyStates = currentRow.cellData.map(cd => {
+                    return {
+                        value: cd.value,
+                        state: {
+                            used: true,
+                            valid: cd.valid || false,
+                            partialValid: cd.partialValid || false
+                        }
+                    };
+                });
+
+                onRowChange(newKeyStates);
+
                 setCurrentBoardData(boardService.updateRowData(currentBoardData, currentRow, row));
                 setActiveGridIndex(boardService.updateActiveIndex(activeGridIndex, newValue));
             } else {

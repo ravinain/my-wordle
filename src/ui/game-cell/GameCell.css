@@ -6,14 +6,16 @@
 
 .valid {
     background-color: green;
+    transition: background-color 4s;
 }
 
 .partial-valid {
     background-color: orange;
+    transition: background-color 4s;
 }
 
 .flip {
-    animation: flip-keyframe 0.7s 1;
+    animation: flip-keyframe 0.5s 1;
 }
 
 .animation-delay1 {

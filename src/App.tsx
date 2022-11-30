@@ -4,6 +4,7 @@ import { GameKeyBoard } from './ui/game-keyboard/GameKeyboard';
 import { Header } from './ui/header/Header';
 import { useEffect, useState } from 'react';
 import { BACKSPACE } from './Constant';
+import { KeyState } from './types/KeyboardType';
 
 const DEFAULT_DATA = {
   value: "",
@@ -12,6 +13,7 @@ const DEFAULT_DATA = {
 
 function App() {
   const [data, setData] = useState(DEFAULT_DATA);
+  const [keyStates, setKeyStates] = useState<KeyState[]>();
 
   const handleKeyDownEvent = (event: any): void => {
     setData(DEFAULT_DATA);
@@ -45,6 +47,10 @@ function App() {
     
   };
 
+  const handleRowChange = (keyStates: KeyState[]): void => {
+    setKeyStates(keyStates);
+  }
+
 
   useEffect(() => {
     
@@ -61,8 +67,8 @@ function App() {
     <div className="app">
       <div className="container">
         <Header />
-        <GameBoard data={data} />
-        <GameKeyBoard handleOnClick={handleVirtualKeyEvent} />
+        <GameBoard data={data} onRowChange={handleRowChange} />
+        <GameKeyBoard handleOnClick={handleVirtualKeyEvent} keyStates={keyStates} />
       </div>
     </div>
   );
