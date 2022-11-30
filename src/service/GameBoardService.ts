@@ -18,8 +18,10 @@ export const GameBoardService = (): GameBoardServiceType => {
 
     const getInitialData = ():GameRowData[] => {
         return [...Array(NUMBER_OF_ATTEMPTS).keys()].map(a => {
-            return [...Array(WORD_SIZE).keys()]
-            .map(w => Object.assign({}, DEFAULT_CELL_DATA));
+            return {
+                cellData: [...Array(WORD_SIZE).keys()].map(w => Object.assign({}, DEFAULT_CELL_DATA)),
+                validated: false
+            }
         });
     };
 
@@ -66,7 +68,7 @@ export const GameBoardService = (): GameBoardServiceType => {
     const updateBoardData = (currentData: GameRowData[], currentGridIndex:GridIndex, value: string): GameRowData[] => {
         let newValue = value.toUpperCase();
         let {row, column} = currentGridIndex;
-        let currentCellValueEmpty = currentData[row][column].value === "";
+        let currentCellValueEmpty = currentData[row].cellData[column].value === "";
 
         if (newValue === ENTER) {
             return currentData;
@@ -81,10 +83,18 @@ export const GameBoardService = (): GameBoardServiceType => {
 
         
         const newData = [...currentData];
-        newData[row][column].value = newValue;
+        newData[row].cellData[column].value = newValue;
 
         return newData;
     };
+
+    const updateRowData = (currentData: GameRowData[], newRowData: GameRowData, row: number): GameRowData[] => {
+        const newData = [...currentData];
+
+        newData[row] = newRowData;
+
+        return newData;
+    }
 
     const updateActiveIndex = (currentActiveIndex: GridIndex, value: string): GridIndex => {
         let {row, column} = currentActiveIndex;
@@ -118,7 +128,8 @@ export const GameBoardService = (): GameBoardServiceType => {
         getNextColumnIndex,
         getNextRowIndex,
         updateBoardData,
-        updateActiveIndex
+        updateActiveIndex,
+        updateRowData
     }
 
 };

@@ -5,4 +5,7 @@ export type GameRowProps = {
     shake?: boolean;
 };
 
-export type GameRowData = CellData[];
+export type GameRowData = {
+    cellData: CellData[];
+    validated?: boolean;
+};

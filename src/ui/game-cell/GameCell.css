@@ -3,3 +3,61 @@
     flex-grow: 1;
     flex-basis: 2rem;
 }
+
+.valid {
+    background-color: green;
+    transition: background-color 4s;
+}
+
+.partial-valid {
+    background-color: orange;
+    transition: background-color 4s;
+}
+
+.flip {
+    animation: flip-keyframe 0.5s 1;
+}
+
+.animation-delay1 {
+    animation-delay: 0.1s;
+}
+
+.animation-delay2 {
+    animation-delay: 0.3s;
+}
+
+.animation-delay3 {
+    animation-delay: 0.5s;
+}
+
+.animation-delay4 {
+    animation-delay: 0.7s;
+}
+
+.animation-delay5 {
+    animation-delay: 0.9s;
+}
+  
+@keyframes flip-keyframe {
+    0% {
+        transform: rotateX(0);
+    }
+    15% {
+        transform: rotateX(30deg);
+    }
+    30% {
+        transform: rotateX(60deg);
+    }
+    50% {
+        transform: rotateX(90deg);
+    }
+    70% {
+        transform: rotateX(60deg);
+    }
+    85% {
+        transform: rotateX(30deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}

@@ -11,20 +11,23 @@ const boardService = GameBoardService();
 export const ValidationService = (): ValidationServiceType => {
 
     const validate = (rowData: GameRowData): boolean => {
-        const inputWord = rowData.map(rd => rd.value).join("");
+        const { cellData } = rowData;
+        const inputWord = cellData.map(rd => rd.value).join("");
         console.log("Input word: ", inputWord);
 
         if (VALID_VALUES.findIndex(w => w === inputWord) === -1) {
             return false;
         }
 
-        rowData.forEach((rd, index) => {
+        cellData.forEach((rd, index) => {
             if (VALID_WORD[index] === rd.value) {
                 rd.valid = true;
             } else if (VALID_WORD.indexOf(rd.value) !== -1) {
                 rd.partialValid = true;
             }
         });
+
+        rowData.validated = true;
 
         return true;
     }
@@ -36,7 +39,7 @@ export const ValidationService = (): ValidationServiceType => {
 
         return newValue === ENTER && 
             boardService.isLastColumn(column) && 
-            currentRow[column].value !== "";
+            currentRow.cellData[column].value !== "";
 
     }
 
