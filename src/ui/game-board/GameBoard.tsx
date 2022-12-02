@@ -6,6 +6,7 @@ import { GameBoardService } from '../../service/GameBoardService';
 import { useState, useEffect } from 'react';
 import { useDeepCompareCallback } from "use-deep-compare";
 import { ValidationService } from '../../service/ValidationService';
+import { GameBoardDialog } from './GameBoardDialog';
 
 
 const boardService: GameBoardServiceType = GameBoardService();
@@ -17,6 +18,7 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
     const [activeGridIndex, setActiveGridIndex] = useState(boardService.getStartGridIndex());
     const {row} = activeGridIndex;
     const [invalidData, setInvalidData] = useState(false);
+    const [openStats, setOpenStats] = useState(false);
 
     const prepareBoard = useDeepCompareCallback((): JSX.Element[] => {
         return [...Array(NUMBER_OF_ATTEMPTS).keys()].map(a => {
@@ -31,6 +33,7 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
         const currentRow = currentBoardData[row];
         if (validationService.shouldValidate(newValue, activeGridIndex, currentRow)) {
             if (validationService.validate(currentRow)) {
+                setOpenStats(currentRow.win);
                 const newKeyStates = currentRow.cellData.map(cd => {
                     return {
                         value: cd.value,
@@ -66,9 +69,14 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
         
     }, [data]);
 
+    const onStatsDialogClose = (): void => {
+        setOpenStats(false);
+    };
+
     return (
         <div className="game-board">
             {prepareBoard()}
+            <GameBoardDialog open={openStats} onClose={onStatsDialogClose} />
         </div>
     );
 

@@ -8,4 +8,5 @@ export type GameRowProps = {
 export type GameRowData = {
     cellData: CellData[];
     validated?: boolean;
+    win: boolean;
 };

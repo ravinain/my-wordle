@@ -19,15 +19,20 @@ export const ValidationService = (): ValidationServiceType => {
             return false;
         }
 
+        let win = true;
+
         cellData.forEach((rd, index) => {
             if (VALID_WORD[index] === rd.value) {
                 rd.valid = true;
             } else if (VALID_WORD.indexOf(rd.value) !== -1) {
                 rd.partialValid = true;
             }
+
+            win = win && rd.valid && !rd.partialValid;
         });
 
         rowData.validated = true;
+        rowData.win = win;
 
         return true;
     }

@@ -34,3 +34,8 @@ export type ValidationServiceType = {
 export type GameKeyboardServiceType = {
     updateKeyboardState: (keyboardState: RowKeyState[], keyStates: KeyState[]) => RowKeyState[];
 };
+
+export type GameBoardDialogProps = {
+    open: boolean;
+    onClose: () => void;
+};
