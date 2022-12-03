@@ -20,7 +20,8 @@ export const GameBoardService = (): GameBoardServiceType => {
         return [...Array(NUMBER_OF_ATTEMPTS).keys()].map(a => {
             return {
                 cellData: [...Array(WORD_SIZE).keys()].map(w => Object.assign({}, DEFAULT_CELL_DATA)),
-                validated: false
+                validated: false,
+                win: false
             }
         });
     };

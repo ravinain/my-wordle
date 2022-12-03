@@ -1,0 +1,105 @@
+.dialog {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.dialog .container {
+    background: #121213;
+    color: white;
+    width: 26rem;
+    height: 30rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.dialog .container > * {
+    width: 100%;
+}
+
+.dialog .container .close-btn {
+    width: fit-content;
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.dialog .container .close-btn:hover {
+    color: rgb(255, 0, 0, 0.8);
+}
+
+.dialog .container header {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.dialog .container header .title {
+    align-self: center;
+    font-weight: 700;
+    font-size: x-large;
+}
+
+.dialog .container section {
+    flex-grow: 8;
+    align-self: center;
+}
+
+.dialog .container footer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.dialog .container footer div {
+    align-self: center;
+    justify-content: center;
+    display: flex;
+}
+
+footer button {
+    text-transform: uppercase;
+    margin-right: 0.4rem;
+}
+
+button.primary {
+    background-color: rgb(79 187 79);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    font-weight: 600;
+    font-size: large;
+    letter-spacing: 0.11rem;
+}
+
+button.primary:hover {
+    opacity: 0.5;
+}
+
+button svg {
+    padding-left: 0.7rem;
+}
+
+button.secondary {
+    background-color: rgb(150, 150, 150);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    font-weight: 600;
+    font-size: large;
+    letter-spacing: 0.11rem;
+}
+
+button.secondary:hover {
+    opacity: 0.5;
+}
