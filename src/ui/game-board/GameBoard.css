@@ -47,3 +47,7 @@
     background-color: grey;
     margin-left: 0.3rem;
 }
+
+.distribution .bar.highlight {
+    background-color: rgb(79 187 79);
+}

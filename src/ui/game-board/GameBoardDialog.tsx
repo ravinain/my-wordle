@@ -2,13 +2,12 @@ import { DialogAction, DialogProps } from "../../types/DialogType";
 import { Dialog } from "../common/dialog/Dialog";
 import { IoMdRefresh } from 'react-icons/io';
 import { NUMBER_OF_ATTEMPTS } from "../../Constant";
-import { useEffect, useState } from "react";
 import { GameBoardDialogProps } from "../../types/GameBoardType";
 
 export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
 
     const header = "STATISTICS";
-    const { open, onClose } = props;
+    const { open, onClose, winRow } = props;
     const handleOnPlayAgainClick = (): void => {
         onClose();
     };
@@ -46,7 +45,7 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
                                 return (
                                     <div className="row">
                                         <label>{i+1}</label>
-                                        <label className="bar">0</label>
+                                        <label className={"bar " + (winRow === i ? "highlight" : "" )}>0</label>
                                     </div>
                                 );
                             })

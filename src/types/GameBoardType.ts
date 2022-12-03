@@ -37,5 +37,6 @@ export type GameKeyboardServiceType = {
 
 export type GameBoardDialogProps = {
     open: boolean;
+    winRow: number;
     onClose: () => void;
 };

@@ -19,6 +19,7 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
     const {row} = activeGridIndex;
     const [invalidData, setInvalidData] = useState(false);
     const [openStats, setOpenStats] = useState(false);
+    const [win, setWin] = useState(false);
 
     const prepareBoard = useDeepCompareCallback((): JSX.Element[] => {
         return [...Array(NUMBER_OF_ATTEMPTS).keys()].map(a => {
@@ -34,6 +35,7 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
         if (validationService.shouldValidate(newValue, activeGridIndex, currentRow)) {
             if (validationService.validate(currentRow)) {
                 setOpenStats(currentRow.win);
+                setWin(currentRow.win);
                 const newKeyStates = currentRow.cellData.map(cd => {
                     return {
                         value: cd.value,
@@ -63,7 +65,7 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
         const {value} = data;
 
         setInvalidData(false);
-        if (value) {
+        if (value && !win) {
             validateAndUpdate(value.toUpperCase());
         }
         
@@ -76,7 +78,7 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
     return (
         <div className="game-board">
             {prepareBoard()}
-            <GameBoardDialog open={openStats} onClose={onStatsDialogClose} />
+            <GameBoardDialog open={openStats} onClose={onStatsDialogClose} winRow={activeGridIndex.row} />
         </div>
     );
 
