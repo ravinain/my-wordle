@@ -1,0 +1,73 @@
+@use '../../../base' as b;
+
+.dialog {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: b.$dialog-bg-color;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    .container {
+        background: b.$dialog-container-bg-color;
+        color: b.$dialog-container-color;
+        width: 26rem;
+        height: 30rem;
+        display: flex;
+        justify-content: flex-start;
+
+        > * {
+            width: 100%;
+        }
+
+        .close-btn {
+            width: fit-content;
+            align-self: flex-end;
+            background: transparent;
+            border: none;
+            color: b.$close-btn-color;
+            cursor: pointer;
+            font-weight: 800;
+
+            &:hover {
+                color: b.$close-btn-hover-color;
+            }
+        }
+
+        header {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            .title {
+                align-self: center;
+                font-weight: 700;
+                font-size: x-large;
+            }
+        }
+
+        section {
+            flex-grow: 8;
+            align-self: center;
+        }
+
+        footer {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+
+            div {
+                align-self: center;
+                justify-content: center;
+                display: flex;
+            }
+
+            button {
+                text-transform: uppercase;
+                margin-right: 0.4rem;
+            }
+        }
+    }
+}

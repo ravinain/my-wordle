@@ -1,4 +1,4 @@
-import './GameRow.css';
+import './GameRow.scss';
 import { GameCell } from "../game-cell/GameCell";
 import { GameRowProps } from '../../types/GameRowType';
 import { WORD_SIZE } from '../../Constant';

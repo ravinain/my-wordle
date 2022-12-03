@@ -1,4 +1,4 @@
-import './Header.css';
+import './Header.scss';
 import { FaCog } from 'react-icons/fa';
 import { IoStatsChart } from 'react-icons/io5';
 

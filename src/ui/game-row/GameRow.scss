@@ -1,0 +1,29 @@
+@use '../../base' as b;
+
+.game-row {
+    background-color: b.$game-row-bg-color;
+    width: 23rem;
+    display: flex;
+
+    .game-cell {
+        height: 2.2rem;
+        border: 0.5px solid b.$game-cell-border-color;
+        margin: 0.2rem;
+        color: b.$game-cell-text-color;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.8rem;
+    }
+
+    &.invalid {
+        animation: h-shaking 0.35s 2;
+    }
+}
+
+@keyframes h-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) }
+}

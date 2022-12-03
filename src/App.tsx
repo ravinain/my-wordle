@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { GameBoard } from './ui/game-board/GameBoard';
 import { GameKeyBoard } from './ui/game-keyboard/GameKeyboard';
 import { Header } from './ui/header/Header';

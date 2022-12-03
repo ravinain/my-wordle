@@ -1,0 +1,29 @@
+@use '../../base' as b;
+
+.app-header {
+    background-color: b.$header-bg-color;
+    color: b.$header-color;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.6rem;
+    width: 100%;
+    border-bottom: 1px solid b.$header-border-color;
+
+    .title {
+        flex-grow: 4;
+        font-weight: 700;
+        font-size: 28px;
+        letter-spacing: 0.2rem;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    > div {
+        padding: 0.3rem;
+    }
+}
+
+.stats, .settings {
+    cursor: pointer;
+}

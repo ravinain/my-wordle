@@ -1,4 +1,4 @@
-import "./Dialog.css";
+import "./Dialog.scss";
 import { DialogProps } from "../../../types/DialogType";
 
 
