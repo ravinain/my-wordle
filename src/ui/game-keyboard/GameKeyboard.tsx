@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { GameKeyboardService } from '../../service/GameKeyboardService';
 import { GameKeyBoardProps, RowKeyState } from '../../types/KeyboardType';
-import './GameKeyboard.css'
+import './GameKeyboard.scss'
 import { KeyboardKey } from "./KeyboardKey";
 
 const KEYBOARD_ROWS = [

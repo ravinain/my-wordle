@@ -1,4 +1,4 @@
-import './GameCell.css';
+import './GameCell.scss';
 import { CellTypeProps } from "../../types/CellType";
 
 export const GameCell = (props: CellTypeProps): JSX.Element => {

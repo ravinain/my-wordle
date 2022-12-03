@@ -1,0 +1,63 @@
+$green1: rgb(79 187 79);
+$grey1: rgb(150, 150, 150);
+$text-white1: #ffffff;
+
+// dialog
+$dialog-bg-color: rgba(255, 255, 255, 0.3);
+$dialog-container-bg-color: #121213;
+$dialog-container-color: $text-white1;
+$stat-bar-bg-color: grey;
+$stat-bar-hl-color: $green1;
+$close-btn-color: $text-white1;
+$close-btn-hover-color: rgb(255, 0, 0, 0.8);
+
+// common
+$valid-bg-color: green;
+$partial-valid-bg-color: orange;
+
+// virtual keyboard
+$kb-key-bg-color: #999999;
+$kb-key-text-color: $text-white1;
+$kb-key-invalid-bg-color: #444444;
+
+// Game cell
+$game-cell-text-color: $text-white1;
+$game-cell-border-color: grey;
+
+// Game row
+$game-row-bg-color: #121213;
+
+// Header
+$header-border-color: grey;
+$header-color: $text-white1;
+$header-bg-color: #121213;
+
+%button {
+    color: $text-white1;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    font-weight: 600;
+    font-size: large;
+    letter-spacing: 0.11rem;
+
+    svg {
+        padding-left: 0.7rem;
+    }
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+button {
+    @extend %button;
+
+    &.primary {
+        background-color: $green1;
+    }
+
+    &.secondary {
+        background-color: $grey1;
+    }
+}

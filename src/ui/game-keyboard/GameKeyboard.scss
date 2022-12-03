@@ -1,0 +1,39 @@
+@use '../../base' as b;
+
+.game-keyboard {
+    display: flex;
+    flex-direction: column;
+
+    .keyboard-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 0.5rem;
+
+        .keyboard-key {
+            margin: 0.2rem;
+            background-color: b.$kb-key-bg-color;
+            color: b.$kb-key-text-color;
+            min-width: 1rem;
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 0.3rem;
+
+            &:hover {
+                opacity: 50%;
+            }
+
+            &.invalid {
+                background-color: b.$kb-key-invalid-bg-color;
+            }
+
+            &.valid {
+                background-color: b.$valid-bg-color;
+            }
+
+            &.partial-valid {
+                background-color: b.$partial-valid-bg-color;
+            }
+        }
+    }
+}

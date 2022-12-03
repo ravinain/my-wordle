@@ -1,3 +1,5 @@
+@use '../../base' as b;
+
 .game-cell {
     padding: 0.5rem;
     flex-grow: 1;
@@ -5,12 +7,12 @@
 }
 
 .valid {
-    background-color: green;
+    background-color: b.$valid-bg-color;
     transition: background-color 4s;
 }
 
 .partial-valid {
-    background-color: orange;
+    background-color: b.$partial-valid-bg-color;
     transition: background-color 4s;
 }
 

@@ -1,0 +1,59 @@
+@use '../../base' as b;
+
+.game-board {
+    margin-top: 7rem;
+    margin-bottom: 6.5rem;
+}
+
+.stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .data {
+        margin: 0.5rem 1rem;
+        height: 4.5rem;
+
+        .count {
+            font-size: xx-large;
+        }
+
+        .label {
+            font-size: x-small;
+            max-width: 2.5rem;
+        }
+    }
+}
+
+.guess-distribution {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .distribution {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        padding: 0.5rem 3rem;;
+    }
+}
+
+
+.distribution {
+    
+    .row {
+        margin: 0.5rem 0;
+    }
+
+    .bar {
+        padding: 0.1rem 0.2rem;
+        background-color: b.$stat-bar-bg-color;
+        margin-left: 0.3rem;
+
+        &.highlight {
+            background-color: b.$stat-bar-hl-color;
+        }
+    }
+}

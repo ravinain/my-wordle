@@ -1,4 +1,4 @@
-import './GameBoard.css';
+import './GameBoard.scss';
 import { GameRow } from "../game-row/GameRow";
 import { GameBoardProps, GameBoardServiceType, ValidationServiceType } from '../../types/GameBoardType';
 import { NUMBER_OF_ATTEMPTS } from '../../Constant';
