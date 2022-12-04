@@ -1,60 +1,70 @@
+import { StorageKeys } from "../Constant";
 import { Action, ActionType } from "./action";
-import { AppStateType, DEFAULT_ENTERED_KEY, initialAppState } from "./state";
+import { AppStateType, getDefaultEnteredKey, getInitialAppState } from "./state";
 
 export const reducer = (state: AppStateType, action: Action): AppStateType => {
+    let newState = state;
 
     switch(action.type) {
         case ActionType.PLAY_AGAIN:
-            return initialAppState;
+            newState = getInitialAppState();
+            break;
         case ActionType.UPDATE_KEY_DATA:
-            return {
+            newState = {
                 ...state,
                 keyEventData: action.payload
             };
+            break;
         case ActionType.RESET_KEY_DATA:
-            return {
+            newState = {
                 ...state,
-                keyEventData: DEFAULT_ENTERED_KEY
+                keyEventData: getDefaultEnteredKey()
             };
+            break;
         case ActionType.UPDATE_INVALID_FLAG:
-            return {
+            newState = {
                 ...state,
                 gameBoardData: {
                     ...state.gameBoardData,
                     invalidData: action.payload
                 }
             };
+            break;
         case ActionType.UPDATE_OPEN_STATS_FLAG:
-            return {
+            newState = {
                 ...state,
                 openStats: action.payload
             };
+            break;
         case ActionType.UPDATE_WIN_FLAG:
-            return {
+            newState = {
                 ...state,
                 gameBoardData: {
                     ...state.gameBoardData,
                     win: action.payload
                 }
             };
+            break;
         case ActionType.UPDATE_CURRENT_BOARD:
-            return {
+            newState = {
                 ...state,
                 gameBoardData: {
                     ...state.gameBoardData,
                     currentBoardData: action.payload
                 }
             };
+            break;
         case ActionType.UPDATE_ACTIVE_GRID_INDEX:
-            return {
+            newState = {
                 ...state,
                 gameBoardData: {
                     ...state.gameBoardData,
                     activeGridIndex: action.payload
                 }
             };
+            break;
         case ActionType.UPDATE_INVALID_BOARD_DATA:
-            return {
+            newState = {
                 ...state,
                 gameBoardData: {
                     ...state.gameBoardData,
@@ -62,8 +72,9 @@ export const reducer = (state: AppStateType, action: Action): AppStateType => {
                     currentBoardData: action.payload.currentBoardData
                 }
             };
+            break;
         case ActionType.UPDATE_VALID_BOARD_DATA:
-            return {
+            newState = {
                 ...state,
                 gameBoardData: {
                     ...state.gameBoardData,
@@ -74,8 +85,9 @@ export const reducer = (state: AppStateType, action: Action): AppStateType => {
                 openStats: action.payload.openStats,
                 keyStates: action.payload.keyStates
             };
+            break;
         case ActionType.UPDATE_INCOMPLETE_BOARD_DATA:
-            return {
+            newState = {
                 ...state,
                 gameBoardData: {
                     ...state.gameBoardData,
@@ -83,17 +95,21 @@ export const reducer = (state: AppStateType, action: Action): AppStateType => {
                     activeGridIndex: action.payload.activeGridIndex,
                 }
             };
+            break;
         case ActionType.UPDATE_KEYBOARD_STATE:
-            return {
+            newState = {
                 ...state,
                 keyBoardState: action.payload
             };
+            break;
         case ActionType.UPDATE_KEY_STATES:
-            return {
+            newState = {
                 ...state,
                 keyStates: action.payload
             };
-        default:
-            return state;
+            break
     }
+
+    localStorage.setItem(StorageKeys.APP_STATE_KEY, JSON.stringify(newState));
+    return newState;
 }

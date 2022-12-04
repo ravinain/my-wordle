@@ -11,8 +11,8 @@ const kbService = GameKeyboardService();
 export const GameKeyBoard = (props: GameKeyBoardProps): JSX.Element => {
     const { state, dispatch } = useContext(context);
 
-    const { handleOnClick, keyStates } = props;
-    const { keyBoardState } = state;
+    const { handleOnClick } = props;
+    const { keyBoardState, keyStates } = state;
 
     const handleOnKeyClick = (value: string): void => {
         handleOnClick(value);

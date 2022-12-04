@@ -1,12 +1,11 @@
-import React, { createContext, Dispatch, ReducerAction, ReducerState } from "react";
-import { Action } from "./action";
-import { AppStateType, initialAppState } from "./state";
+import React, { createContext } from "react";
+import { AppStateType, getAppState } from "./state";
 
 
 export default createContext<{
     state: AppStateType,
     dispatch: React.Dispatch<any>;
 }>({
-    state: initialAppState,
+    state: getAppState(),
     dispatch: () => null
 });

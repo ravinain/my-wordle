@@ -1,6 +1,6 @@
 import './GameBoard.scss';
 import { GameRow } from "../game-row/GameRow";
-import { GameBoardProps, GameBoardServiceType, ValidationServiceType } from '../../types/GameBoardType';
+import { GameBoardServiceType, ValidationServiceType } from '../../types/GameBoardType';
 import { NUMBER_OF_ATTEMPTS } from '../../Constant';
 import { GameBoardService } from '../../service/GameBoardService';
 import { useEffect, useContext } from 'react';
