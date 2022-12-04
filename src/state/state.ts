@@ -1,3 +1,4 @@
+import { StorageKeys } from "../Constant";
 import { GameBoardService } from "../service/GameBoardService";
 import { GameBoardServiceType, GridIndex } from "../types/GameBoardType";
 import { GameRowData } from "../types/GameRowType";
@@ -20,9 +21,12 @@ export type AppStateType = {
     keyStates: KeyState[];
 }
 
-export const DEFAULT_ENTERED_KEY = {
-    value: "",
-    shake: false
+export const getDefaultEnteredKey = () => {
+ 
+    return {
+        value: "",
+        shake: false
+    };
 };
 
 const KEYBOARD_ROWS = [
@@ -37,24 +41,42 @@ const DEFAULT_KEY_STATE = {
     partialValid: false
 };
 
-const DEFAULT_KEYBOARD_STATE: RowKeyState[] = KEYBOARD_ROWS.map(row => {
-    return row.map(k => {
-        return {
-            value: k,
-            state: DEFAULT_KEY_STATE
-        };
+const getDefaultKeyboardState = (): RowKeyState[] => {
+    return KEYBOARD_ROWS.map(row => {
+        return row.map(k => {
+            return {
+                value: k,
+                state: DEFAULT_KEY_STATE
+            };
+        });
     });
-});
+};
 
-export const initialAppState: AppStateType = {
-    keyEventData: DEFAULT_ENTERED_KEY,
-    gameBoardData: {
-        currentBoardData: boardService.getInitialData(),
-        activeGridIndex: boardService.getStartGridIndex(),
-        invalidData: false,
-        win: false
-    },
-    openStats: false,
-    keyBoardState: DEFAULT_KEYBOARD_STATE,
-    keyStates: []
+export const getInitialAppState = (): AppStateType => {
+    return {
+        keyEventData: getDefaultEnteredKey(),
+        gameBoardData: {
+            currentBoardData: boardService.getInitialData(),
+            activeGridIndex: boardService.getStartGridIndex(),
+            invalidData: false,
+            win: false
+        },
+        openStats: false,
+        keyBoardState: getDefaultKeyboardState(),
+        keyStates: []
+    };
+};
+
+export const getAppState = (): AppStateType => {
+    const savedState = localStorage.getItem(StorageKeys.APP_STATE_KEY);
+
+    if (savedState) {
+        return JSON.parse(savedState);
+    }
+
+    const appState = getInitialAppState();
+
+    localStorage.setItem(StorageKeys.APP_STATE_KEY, JSON.stringify(appState));
+
+    return appState;
 };

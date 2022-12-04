@@ -90,10 +90,10 @@ export type KeyboardStateAction = {
     payload: RowKeyState[];
 };
 
-type PlayAgainType = ActionType.PLAY_AGAIN;
+type NoPayloadType = ActionType.PLAY_AGAIN | ActionType.RESET_KEY_DATA;
 
-export type PlayAgainAction = {
-    type: PlayAgainType;
+export type NoPayloadAction = {
+    type: NoPayloadType;
 };
 
 type KeyStatesType = ActionType.UPDATE_KEY_STATES;
@@ -105,5 +105,5 @@ export type KeyStatesAction = {
 
 export type Action = KeyEventAction | BooleanAction | GridRowDataAction | 
     GridIndexAction | InvalidGridRowDataAction | ValidGridRowDataAction |
-    IncompleteBoardDataAction | KeyboardStateAction | PlayAgainAction |
+    IncompleteBoardDataAction | KeyboardStateAction | NoPayloadAction |
     KeyStatesAction;

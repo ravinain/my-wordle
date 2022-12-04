@@ -2,21 +2,19 @@ import './App.scss';
 import { GameBoard } from './ui/game-board/GameBoard';
 import { GameKeyBoard } from './ui/game-keyboard/GameKeyboard';
 import { Header } from './ui/header/Header';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { BACKSPACE } from './Constant';
-import { KeyState } from './types/KeyboardType';
 import Context from './state/context';
 import { reducer } from './state/reducer';
-import { DEFAULT_ENTERED_KEY, initialAppState } from './state/state';
+import { getAppState } from './state/state';
 import { ActionType } from './state/action';
 
 
 function App() {
-  const [ state, dispatch ] = useReducer(reducer, initialAppState);
-  const { keyEventData } = state;
+  const [ state, dispatch ] = useReducer(reducer, getAppState());
 
-  const handleKeyDownEvent = (event: any): void => {
-    dispatch({type: ActionType.RESET_KEY_DATA, payload: DEFAULT_ENTERED_KEY});
+  const handleKeyDownEvent = (): void => {
+    dispatch({type: ActionType.RESET_KEY_DATA});
   };
 
   const handleKeyUpEvent = (event: any): void => {

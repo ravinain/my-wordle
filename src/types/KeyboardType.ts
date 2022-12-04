@@ -5,7 +5,6 @@ export type KeyboardKeyProps = {
 
 export type GameKeyBoardProps = {
     handleOnClick: (value: string) => void;
-    keyStates?: KeyState[];
 };
 
 export type RowKeyState = KeyState[];
@@ -22,4 +21,4 @@ export type KeyState = {
 export type KeyEventData = {
     value: string;
     shake: boolean;
-}
+};
