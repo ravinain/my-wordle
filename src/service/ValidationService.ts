@@ -48,10 +48,15 @@ export const ValidationService = (): ValidationServiceType => {
 
     }
 
+    const getValidWord = (): string => {
+        return ["T", "H", "E", "I", "R"].join("");
+    }
+
 
     return {
         validate,
-        shouldValidate
+        shouldValidate,
+        getValidWord
     };
 
 };

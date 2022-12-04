@@ -25,6 +25,7 @@ export type GridIndex = {
 export type ValidationServiceType = {
     validate: (rowData: GameRowData) => boolean;
     shouldValidate: (newValue: string, currentActiveIndex: GridIndex, currentRow: GameRowData) => boolean;
+    getValidWord: () => string;
 };
 
 export type GameKeyboardServiceType = {

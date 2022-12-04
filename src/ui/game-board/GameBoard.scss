@@ -26,6 +26,12 @@
     }
 }
 
+.word {
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+}
+
 .guess-distribution {
     display: flex;
     flex-direction: column;

@@ -1,6 +1,8 @@
+import { Stats } from "fs";
 import { GridIndex } from "../types/GameBoardType";
 import { GameRowData } from "../types/GameRowType";
 import { KeyEventData, KeyState, RowKeyState } from "../types/KeyboardType";
+import { StatsType } from "../types/Stats";
 
 export enum ActionType {
     PLAY_AGAIN = "PLAY_AGAIN",
@@ -53,6 +55,8 @@ export type ValidGridRowDataAction = {
         currentBoardData: GameRowData[];
         activeGridIndex: GridIndex;
         keyStates: KeyState[];
+        stats: StatsType;
+        gameOver: boolean;
     };
 };
 
