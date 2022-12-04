@@ -2,21 +2,21 @@ import './App.scss';
 import { GameBoard } from './ui/game-board/GameBoard';
 import { GameKeyBoard } from './ui/game-keyboard/GameKeyboard';
 import { Header } from './ui/header/Header';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { BACKSPACE } from './Constant';
 import { KeyState } from './types/KeyboardType';
+import Context from './state/context';
+import { reducer } from './state/reducer';
+import { DEFAULT_ENTERED_KEY, initialAppState } from './state/state';
+import { ActionType } from './state/action';
 
-const DEFAULT_DATA = {
-  value: "",
-  shake: false
-};
 
 function App() {
-  const [data, setData] = useState(DEFAULT_DATA);
-  const [keyStates, setKeyStates] = useState<KeyState[]>();
+  const [ state, dispatch ] = useReducer(reducer, initialAppState);
+  const { keyEventData } = state;
 
   const handleKeyDownEvent = (event: any): void => {
-    setData(DEFAULT_DATA);
+    dispatch({type: ActionType.RESET_KEY_DATA, payload: DEFAULT_ENTERED_KEY});
   };
 
   const handleKeyUpEvent = (event: any): void => {
@@ -24,11 +24,11 @@ function App() {
     switch(keyCode) {
       case 13:
       case 8:
-        setData({value: event.key.toUpperCase(), shake: keyCode === 13});
+        dispatch({type: ActionType.UPDATE_KEY_DATA, payload: {value: event.key.toUpperCase(), shake: keyCode === 13}});
         break;
       default:
         if (keyCode > 64 && keyCode < 91) {
-          setData({value: event.key.toUpperCase(), shake: false});
+          dispatch({type: ActionType.UPDATE_KEY_DATA, payload: {value: event.key.toUpperCase(), shake: false}});
         }
     }
   };
@@ -36,21 +36,16 @@ function App() {
   const handleVirtualKeyEvent = (value: string): void => {
     switch(value) {
       case "DEL":
-        setData({value: BACKSPACE, shake: false});
+        dispatch({type: ActionType.UPDATE_KEY_DATA, payload: {value: BACKSPACE, shake: false}});
         break;
       case "ENTER":
-        setData({value, shake: true});
+        dispatch({type: ActionType.UPDATE_KEY_DATA, payload: {value, shake: true}});
         break;
       default:
-        setData({value, shake: false});
+        dispatch({type: ActionType.UPDATE_KEY_DATA, payload: {value, shake: false}});
     }
     
   };
-
-  const handleRowChange = (keyStates: KeyState[]): void => {
-    setKeyStates(keyStates);
-  }
-
 
   useEffect(() => {
     
@@ -64,13 +59,15 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
-      <div className="container">
-        <Header />
-        <GameBoard data={data} onRowChange={handleRowChange} />
-        <GameKeyBoard handleOnClick={handleVirtualKeyEvent} keyStates={keyStates} />
+    <Context.Provider value={{state, dispatch}}>
+      <div className="app">
+        <div className="container">
+          <Header />
+          <GameBoard />
+          <GameKeyBoard handleOnClick={handleVirtualKeyEvent}/>
+        </div>
       </div>
-    </div>
+    </Context.Provider>
   );
 }
 

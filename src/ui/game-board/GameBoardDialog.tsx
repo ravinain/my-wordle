@@ -3,17 +3,24 @@ import { Dialog } from "../common/dialog/Dialog";
 import { IoMdRefresh } from 'react-icons/io';
 import { NUMBER_OF_ATTEMPTS } from "../../Constant";
 import { GameBoardDialogProps } from "../../types/GameBoardType";
+import { useContext } from "react";
+import context from "../../state/context";
+import { ActionType } from "../../state/action";
 
 export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
 
+    const { state, dispatch } = useContext(context);
+    const { openStats } = state;
+
     const header = "STATISTICS";
-    const { open, onClose, winRow } = props;
+    const { winRow } = props;
+
     const handleOnPlayAgainClick = (): void => {
-        onClose();
+        dispatch({type: ActionType.PLAY_AGAIN});
     };
 
     const handleOnClose = (): void => {
-        onClose();
+        dispatch({type: ActionType.UPDATE_OPEN_STATS_FLAG, payload: false});
     };
 
     const getContent = (): JSX.Element => {
@@ -72,8 +79,9 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
         content: getContent(),
         actions,
         state: {
-            open
-        }
+            open: openStats
+        },
+        onClose: handleOnClose
     };
 
     return (

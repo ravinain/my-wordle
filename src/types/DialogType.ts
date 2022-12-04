@@ -18,4 +18,5 @@ export type DialogProps = {
     content: JSX.Element;
     actions?: DialogAction[];
     state: DialogState;
+    onClose: () => void;
 };

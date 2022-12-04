@@ -3,23 +3,21 @@ import { GameRow } from "../game-row/GameRow";
 import { GameBoardProps, GameBoardServiceType, ValidationServiceType } from '../../types/GameBoardType';
 import { NUMBER_OF_ATTEMPTS } from '../../Constant';
 import { GameBoardService } from '../../service/GameBoardService';
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useDeepCompareCallback } from "use-deep-compare";
 import { ValidationService } from '../../service/ValidationService';
 import { GameBoardDialog } from './GameBoardDialog';
+import context from '../../state/context';
+import { ActionType } from '../../state/action';
 
 
 const boardService: GameBoardServiceType = GameBoardService();
 const validationService: ValidationServiceType = ValidationService();
 
-export const GameBoard = (props: GameBoardProps): JSX.Element => {
-    const {data, onRowChange} = props;
-    const [currentBoardData, setCurrentBoardData] = useState(boardService.getInitialData());
-    const [activeGridIndex, setActiveGridIndex] = useState(boardService.getStartGridIndex());
+export const GameBoard = (): JSX.Element => {
+    const { state, dispatch } = useContext(context);
+    const { keyEventData, gameBoardData:{invalidData, win, currentBoardData, activeGridIndex} } = state;
     const {row} = activeGridIndex;
-    const [invalidData, setInvalidData] = useState(false);
-    const [openStats, setOpenStats] = useState(false);
-    const [win, setWin] = useState(false);
 
     const prepareBoard = useDeepCompareCallback((): JSX.Element[] => {
         return [...Array(NUMBER_OF_ATTEMPTS).keys()].map(a => {
@@ -34,8 +32,6 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
         const currentRow = currentBoardData[row];
         if (validationService.shouldValidate(newValue, activeGridIndex, currentRow)) {
             if (validationService.validate(currentRow)) {
-                setOpenStats(currentRow.win);
-                setWin(currentRow.win);
                 const newKeyStates = currentRow.cellData.map(cd => {
                     return {
                         value: cd.value,
@@ -47,38 +43,50 @@ export const GameBoard = (props: GameBoardProps): JSX.Element => {
                     };
                 });
 
-                onRowChange(newKeyStates);
-
-                setCurrentBoardData(boardService.updateRowData(currentBoardData, currentRow, row));
-                setActiveGridIndex(boardService.updateActiveIndex(activeGridIndex, newValue));
+                dispatch({
+                    type: ActionType.UPDATE_VALID_BOARD_DATA,
+                    payload: {
+                        openStats: currentRow.win,
+                        win: currentRow.win,
+                        activeGridIndex: boardService.updateActiveIndex(activeGridIndex, newValue),
+                        currentBoardData: boardService.updateRowData(currentBoardData, currentRow, row),
+                        keyStates: newKeyStates
+                    }
+                });
             } else {
-                setCurrentBoardData(currentBoardData);
-                setInvalidData(true);
+                dispatch({type: ActionType.UPDATE_INVALID_BOARD_DATA, payload: {
+                    currentBoardData,
+                    invalidData: true
+                }});
             }
         } else {
-            setCurrentBoardData(boardService.updateBoardData(currentBoardData, activeGridIndex, newValue));
-            setActiveGridIndex(boardService.updateActiveIndex(activeGridIndex, newValue));
+            dispatch({type: ActionType.UPDATE_INCOMPLETE_BOARD_DATA,
+                payload: {
+                    currentBoardData: boardService.updateBoardData(currentBoardData, activeGridIndex, newValue),
+                    activeGridIndex: boardService.updateActiveIndex(activeGridIndex, newValue)
+                }
+            });
         }
     };
 
     useEffect(() => {
-        const {value} = data;
+        const {value} = keyEventData;
 
-        setInvalidData(false);
+        dispatch({type: ActionType.UPDATE_INVALID_FLAG, payload: false});
         if (value && !win) {
             validateAndUpdate(value.toUpperCase());
         }
         
-    }, [data]);
+    }, [keyEventData]);
 
     const onStatsDialogClose = (): void => {
-        setOpenStats(false);
+        dispatch({type: ActionType.UPDATE_OPEN_STATS_FLAG, payload: false});
     };
 
     return (
         <div className="game-board">
             {prepareBoard()}
-            <GameBoardDialog open={openStats} onClose={onStatsDialogClose} winRow={activeGridIndex.row} />
+            <GameBoardDialog onClose={onStatsDialogClose} winRow={activeGridIndex.row} />
         </div>
     );
 

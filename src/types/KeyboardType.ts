@@ -18,3 +18,8 @@ export type KeyState = {
         partialValid: boolean;
     };
 };
+
+export type KeyEventData = {
+    value: string;
+    shake: boolean;
+}
