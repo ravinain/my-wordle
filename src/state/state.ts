@@ -3,6 +3,7 @@ import { GameBoardService } from "../service/GameBoardService";
 import { GameBoardServiceType, GridIndex } from "../types/GameBoardType";
 import { GameRowData } from "../types/GameRowType";
 import { KeyEventData, KeyState, RowKeyState } from "../types/KeyboardType"
+import { StatsType } from "../types/Stats";
 
 const boardService: GameBoardServiceType = GameBoardService();
 
@@ -19,6 +20,8 @@ export type AppStateType = {
     openStats: boolean;
     keyBoardState: RowKeyState[];
     keyStates: KeyState[];
+    stats: StatsType;
+    gameOver: boolean;
 }
 
 export const getDefaultEnteredKey = () => {
@@ -63,7 +66,15 @@ export const getInitialAppState = (): AppStateType => {
         },
         openStats: false,
         keyBoardState: getDefaultKeyboardState(),
-        keyStates: []
+        keyStates: [],
+        stats: {
+            total: 0,
+            win: 0,
+            maxStreak: 0,
+            currentStreak: 0,
+            distribution: [0,0,0,0,0,0]
+        },
+        gameOver: false
     };
 };
 

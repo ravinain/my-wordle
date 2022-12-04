@@ -9,14 +9,17 @@ import { ValidationService } from '../../service/ValidationService';
 import { GameBoardDialog } from './GameBoardDialog';
 import context from '../../state/context';
 import { ActionType } from '../../state/action';
+import { StatsServiceType } from '../../types/Stats';
+import { StatsService } from '../../service/StatsService';
 
 
 const boardService: GameBoardServiceType = GameBoardService();
 const validationService: ValidationServiceType = ValidationService();
+const statsService: StatsServiceType = StatsService();
 
 export const GameBoard = (): JSX.Element => {
     const { state, dispatch } = useContext(context);
-    const { keyEventData, gameBoardData:{invalidData, win, currentBoardData, activeGridIndex} } = state;
+    const { keyEventData, gameBoardData:{invalidData, win, currentBoardData, activeGridIndex}, stats } = state;
     const {row} = activeGridIndex;
 
     const prepareBoard = useDeepCompareCallback((): JSX.Element[] => {
@@ -46,11 +49,13 @@ export const GameBoard = (): JSX.Element => {
                 dispatch({
                     type: ActionType.UPDATE_VALID_BOARD_DATA,
                     payload: {
-                        openStats: currentRow.win,
+                        openStats: currentRow.win || boardService.isLastRow(row),
                         win: currentRow.win,
                         activeGridIndex: boardService.updateActiveIndex(activeGridIndex, newValue),
                         currentBoardData: boardService.updateRowData(currentBoardData, currentRow, row),
-                        keyStates: newKeyStates
+                        keyStates: newKeyStates,
+                        stats: statsService.updateStats(stats, currentRow.win, row),
+                        gameOver: currentRow.win || boardService.isLastRow(row)
                     }
                 });
             } else {

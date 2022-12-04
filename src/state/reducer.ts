@@ -7,7 +7,10 @@ export const reducer = (state: AppStateType, action: Action): AppStateType => {
 
     switch(action.type) {
         case ActionType.PLAY_AGAIN:
-            newState = getInitialAppState();
+            newState = {
+                ...getInitialAppState(),
+                stats: state.stats
+            };
             break;
         case ActionType.UPDATE_KEY_DATA:
             newState = {
@@ -83,8 +86,13 @@ export const reducer = (state: AppStateType, action: Action): AppStateType => {
                     win: action.payload.win
                 },
                 openStats: action.payload.openStats,
-                keyStates: action.payload.keyStates
+                keyStates: action.payload.keyStates,
+                stats: {
+                    ...action.payload.stats
+                },
+                gameOver: action.payload.gameOver
             };
+            
             break;
         case ActionType.UPDATE_INCOMPLETE_BOARD_DATA:
             newState = {

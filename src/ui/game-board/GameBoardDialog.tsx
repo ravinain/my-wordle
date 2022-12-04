@@ -1,19 +1,21 @@
 import { DialogAction, DialogProps } from "../../types/DialogType";
 import { Dialog } from "../common/dialog/Dialog";
 import { IoMdRefresh } from 'react-icons/io';
-import { NUMBER_OF_ATTEMPTS } from "../../Constant";
-import { GameBoardDialogProps } from "../../types/GameBoardType";
+import { GameBoardDialogProps, ValidationServiceType } from "../../types/GameBoardType";
 import { useContext } from "react";
 import context from "../../state/context";
 import { ActionType } from "../../state/action";
+import { ValidationService } from "../../service/ValidationService";
+
+const validationService: ValidationServiceType = ValidationService();
 
 export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
 
     const { state, dispatch } = useContext(context);
-    const { openStats } = state;
+    const { openStats, stats, gameOver, gameBoardData:{win} } = state;
+    const { distribution } = stats;
 
     const header = "STATISTICS";
-    const { winRow } = props;
 
     const handleOnPlayAgainClick = (): void => {
         dispatch({type: ActionType.PLAY_AGAIN});
@@ -26,21 +28,24 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
     const getContent = (): JSX.Element => {
         return (
             <>
+                <div className="word">
+                    {gameOver && !win ? validationService.getValidWord() : null}
+                </div>
                 <div className="stats">
                     <div className="data">
-                        <div className="count">2</div>
+                        <div className="count">{stats.total}</div>
                         <div className="label">Played</div>
                     </div>
                     <div className="data">
-                        <div className="count">50</div>
+                        <div className="count">{stats.total > 0 ? ((stats.win/stats.total) * 100).toFixed(0) : 0}</div>
                         <div className="label">Win %</div>
                     </div>
                     <div className="data">
-                        <div className="count">1</div>
+                        <div className="count">{stats.currentStreak}</div>
                         <div className="label">Current Streak</div>
                     </div>
                     <div className="data">
-                        <div className="count">1</div>
+                        <div className="count">{stats.maxStreak}</div>
                         <div className="label">Max Streak</div>
                     </div>
                 </div>
@@ -48,11 +53,11 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
                     <div>GUESS DISTRIBUTION</div>
                     <div className="distribution">
                         {
-                            [...new Array(NUMBER_OF_ATTEMPTS).keys()].map(i => {
+                            distribution.map((data, index) => {
                                 return (
                                     <div className="row">
-                                        <label>{i+1}</label>
-                                        <label className={"bar " + (winRow === i ? "highlight" : "" )}>0</label>
+                                        <label>{ index + 1 }</label>
+                                        <label className={"bar " + (stats.lastWinAttempt === index ? "highlight" : "" )}>{data}</label>
                                     </div>
                                 );
                             })
