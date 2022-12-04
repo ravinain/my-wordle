@@ -2,10 +2,6 @@ import { GameRowData } from "./GameRowType";
 import { KeyState, RowKeyState } from "./KeyboardType";
 
 export type GameBoardProps = {
-    data: {
-        value: string;
-        shake?: boolean;
-    };
     onRowChange: (keyStates: KeyState[]) => void;
 };
 
@@ -36,7 +32,6 @@ export type GameKeyboardServiceType = {
 };
 
 export type GameBoardDialogProps = {
-    open: boolean;
     winRow: number;
     onClose: () => void;
 };

@@ -3,7 +3,7 @@ import { DialogProps } from "../../../types/DialogType";
 
 
 export const Dialog = (props: DialogProps): JSX.Element => {
-    const { content, state: {open} } = props;
+    const { content, state: {open}, onClose } = props;
 
     const getFooter = (): JSX.Element => {
         
@@ -33,7 +33,7 @@ export const Dialog = (props: DialogProps): JSX.Element => {
         <dialog open className="dialog">
             <div className="container">
                 <header>
-                    <button className="close-btn">X</button>
+                    <button className="close-btn" onClick={onClose}>X</button>
                     <div className="title">{props.header}</div>
                 </header>
                 <section>

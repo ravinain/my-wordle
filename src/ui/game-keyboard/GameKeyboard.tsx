@@ -1,35 +1,18 @@
-import { useEffect, useState } from 'react';
-import { GameKeyboardService } from '../../service/GameKeyboardService';
-import { GameKeyBoardProps, RowKeyState } from '../../types/KeyboardType';
 import './GameKeyboard.scss'
+import { useContext, useEffect } from 'react';
+import { GameKeyboardService } from '../../service/GameKeyboardService';
+import { ActionType } from '../../state/action';
+import context from '../../state/context';
+import { GameKeyBoardProps } from '../../types/KeyboardType';
 import { KeyboardKey } from "./KeyboardKey";
-
-const KEYBOARD_ROWS = [
-    ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-    ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DEL"]
-];
-
-const DEFAULT_KEY_STATE = {
-    valid: false,
-    used: false,
-    partialValid: false
-};
-
-const DEFAULT_KEYBOARD_STATE: RowKeyState[] = KEYBOARD_ROWS.map(row => {
-    return row.map(k => {
-        return {
-            value: k,
-            state: DEFAULT_KEY_STATE
-        };
-    });
-});
 
 const kbService = GameKeyboardService();
 
 export const GameKeyBoard = (props: GameKeyBoardProps): JSX.Element => {
+    const { state, dispatch } = useContext(context);
+
     const { handleOnClick, keyStates } = props;
-    const [keyBoardState, setKeyBoardState] = useState(DEFAULT_KEYBOARD_STATE);
+    const { keyBoardState } = state;
 
     const handleOnKeyClick = (value: string): void => {
         handleOnClick(value);
@@ -50,7 +33,7 @@ export const GameKeyBoard = (props: GameKeyBoardProps): JSX.Element => {
 
     useEffect(() => {
         if (keyStates) {
-            setKeyBoardState(kbService.updateKeyboardState(keyBoardState, keyStates));
+            dispatch({type: ActionType.UPDATE_KEYBOARD_STATE, payload: kbService.updateKeyboardState(keyBoardState, keyStates)});
         }
     }, [keyStates]);
 
