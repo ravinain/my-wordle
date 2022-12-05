@@ -1,8 +1,11 @@
 @use '../../base' as b;
 
 .game-board {
-    margin-top: 7rem;
+    margin-top: 6rem;
     margin-bottom: 6.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .stats {
@@ -28,8 +31,13 @@
 
 .word {
     display: flex;
-    justify-content: center;
     font-style: italic;
+    background-color: #878484;
+    padding: 0.3rem 1rem;
+    color: white;
+    width: fit-content;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .guess-distribution {
@@ -43,6 +51,7 @@
         flex-direction: column;
         align-self: flex-start;
         padding: 0.5rem 3rem;;
+        width: 80%;
     }
 }
 
@@ -57,6 +66,9 @@
         padding: 0.1rem 0.2rem;
         background-color: b.$stat-bar-bg-color;
         margin-left: 0.3rem;
+        display: inline-block;
+        text-align: right;
+        min-width: fit-content;
 
         &.highlight {
             background-color: b.$stat-bar-hl-color;

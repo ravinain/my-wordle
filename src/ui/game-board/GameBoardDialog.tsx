@@ -25,19 +25,28 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
         dispatch({type: ActionType.UPDATE_OPEN_STATS_FLAG, payload: false});
     };
 
+    const getWidth = (count: number): string => {
+        if (stats.total === 0) {
+            return "0";
+        }
+
+        return `${(count * 100)/stats.total}%`;
+    };
+
+    const getWinPercentage = (): string => {
+        return stats.total > 0 ? ((stats.win/stats.total) * 100).toFixed(0) : "0";
+    };
+
     const getContent = (): JSX.Element => {
         return (
             <>
-                <div className="word">
-                    {gameOver && !win ? validationService.getValidWord() : null}
-                </div>
                 <div className="stats">
                     <div className="data">
                         <div className="count">{stats.total}</div>
                         <div className="label">Played</div>
                     </div>
                     <div className="data">
-                        <div className="count">{stats.total > 0 ? ((stats.win/stats.total) * 100).toFixed(0) : 0}</div>
+                        <div className="count">{getWinPercentage()}</div>
                         <div className="label">Win %</div>
                     </div>
                     <div className="data">
@@ -57,7 +66,7 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
                                 return (
                                     <div className="row">
                                         <label>{ index + 1 }</label>
-                                        <label className={"bar " + (stats.lastWinAttempt === index ? "highlight" : "" )}>{data}</label>
+                                        <label className={"bar " + (stats.lastWinAttempt === index ? "highlight" : "" )} style={{width: getWidth(data)}}>{data}</label>
                                     </div>
                                 );
                             })
