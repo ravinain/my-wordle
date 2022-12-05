@@ -19,7 +19,7 @@ const statsService: StatsServiceType = StatsService();
 
 export const GameBoard = (): JSX.Element => {
     const { state, dispatch } = useContext(context);
-    const { keyEventData, gameBoardData:{invalidData, win, currentBoardData, activeGridIndex}, stats } = state;
+    const { keyEventData, gameBoardData:{invalidData, win, currentBoardData, activeGridIndex}, stats, gameOver } = state;
     const {row} = activeGridIndex;
 
     const prepareBoard = useDeepCompareCallback((): JSX.Element[] => {
@@ -90,6 +90,9 @@ export const GameBoard = (): JSX.Element => {
 
     return (
         <div className="game-board">
+            <div className="word">
+                {gameOver && !win ? validationService.getValidWord() : null}
+            </div>
             {prepareBoard()}
             <GameBoardDialog onClose={onStatsDialogClose} winRow={activeGridIndex.row} />
         </div>
