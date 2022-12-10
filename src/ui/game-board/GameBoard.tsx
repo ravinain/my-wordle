@@ -93,7 +93,7 @@ export const GameBoard = (): JSX.Element => {
             {
                 gameOver && !win &&
                 <div className="word">
-                    {validationService.getValidWord()}
+                    {validWord}
                 </div>
             }
             {prepareBoard()}
