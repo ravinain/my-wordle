@@ -10,6 +10,7 @@ $stat-bar-bg-color: grey;
 $stat-bar-hl-color: $green1;
 $close-btn-color: $text-white1;
 $close-btn-hover-color: rgb(255, 0, 0, 0.8);
+$mode-bg-color: #009688;
 
 // common
 $valid-bg-color: green;
@@ -31,6 +32,10 @@ $game-row-bg-color: #121213;
 $header-border-color: grey;
 $header-color: $text-white1;
 $header-bg-color: #121213;
+
+// Game board
+$word-bg-color: #878484;
+$word-color: $text-white1;
 
 %button {
     color: $text-white1;

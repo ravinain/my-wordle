@@ -32,9 +32,9 @@
 .word {
     display: flex;
     font-style: italic;
-    background-color: #878484;
+    background-color: b.$word-bg-color;
     padding: 0.3rem 1rem;
-    color: white;
+    color: b.$word-color;
     width: fit-content;
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;

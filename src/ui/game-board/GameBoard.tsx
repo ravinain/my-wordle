@@ -19,7 +19,7 @@ const statsService: StatsServiceType = StatsService();
 
 export const GameBoard = (): JSX.Element => {
     const { state, dispatch } = useContext(context);
-    const { keyEventData, gameBoardData:{invalidData, win, currentBoardData, activeGridIndex}, stats, gameOver } = state;
+    const { keyEventData, gameBoardData:{invalidData, win, currentBoardData, activeGridIndex, validWord}, stats, gameOver } = state;
     const {row} = activeGridIndex;
 
     const prepareBoard = useDeepCompareCallback((): JSX.Element[] => {
@@ -27,14 +27,14 @@ export const GameBoard = (): JSX.Element => {
             const shakeRow = invalidData &&
             a === row && 
             !currentBoardData[a].validated;
-            return <GameRow rowData={currentBoardData[a]} shake={shakeRow} />;
+            return <GameRow key={`row_${a}`} rowData={currentBoardData[a]} shake={shakeRow} />;
         });
     }, [currentBoardData, invalidData]);
 
     const validateAndUpdate = (newValue: string): void => {
         const currentRow = currentBoardData[row];
         if (validationService.shouldValidate(newValue, activeGridIndex, currentRow)) {
-            if (validationService.validate(currentRow)) {
+            if (validationService.validate(currentRow, validWord)) {
                 const newKeyStates = currentRow.cellData.map(cd => {
                     return {
                         value: cd.value,
@@ -90,9 +90,12 @@ export const GameBoard = (): JSX.Element => {
 
     return (
         <div className="game-board">
-            <div className="word">
-                {gameOver && !win ? validationService.getValidWord() : null}
-            </div>
+            {
+                gameOver && !win &&
+                <div className="word">
+                    {validationService.getValidWord()}
+                </div>
+            }
             {prepareBoard()}
             <GameBoardDialog onClose={onStatsDialogClose} winRow={activeGridIndex.row} />
         </div>

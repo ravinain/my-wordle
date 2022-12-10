@@ -29,9 +29,19 @@ export const Dialog = (props: DialogProps): JSX.Element => {
         return <></>;
     }
 
+    const getContainerClasses = (): string => {
+        const classes = ["container"];
+
+        if (props.dialogSize) {
+            classes.push(props.dialogSize);
+        }
+
+        return classes.join(" ");
+    };
+
     return (
         <dialog open className="dialog">
-            <div className="container">
+            <div className={getContainerClasses()}>
                 <header>
                     <button className="close-btn" onClick={onClose}>X</button>
                     <div className="title">{props.header}</div>

@@ -1,6 +1,6 @@
-import { Stats } from "fs";
 import { GridIndex } from "../types/GameBoardType";
 import { GameRowData } from "../types/GameRowType";
+import { ModeType } from "../types/GameSettingsType";
 import { KeyEventData, KeyState, RowKeyState } from "../types/KeyboardType";
 import { StatsType } from "../types/Stats";
 
@@ -20,6 +20,10 @@ export enum ActionType {
 
     UPDATE_KEYBOARD_STATE = "UPDATE_KEYBOARD_STATE",
     UPDATE_KEY_STATES = "UPDATE_KEY_STATES",
+
+    UPDATE_MODE = "UPDATE_MODE",
+    CLOSE_SETTINGS = "CLOSE_SETTINGS",
+    OPEN_SETTINGS = "OPEN_SETTINGS"
 }
 
 type KeyEventActionType = ActionType.UPDATE_KEY_DATA | ActionType.RESET_KEY_DATA;
@@ -94,7 +98,8 @@ export type KeyboardStateAction = {
     payload: RowKeyState[];
 };
 
-type NoPayloadType = ActionType.PLAY_AGAIN | ActionType.RESET_KEY_DATA;
+type NoPayloadType = ActionType.PLAY_AGAIN | ActionType.RESET_KEY_DATA | 
+    ActionType.CLOSE_SETTINGS | ActionType.OPEN_SETTINGS;
 
 export type NoPayloadAction = {
     type: NoPayloadType;
@@ -107,7 +112,14 @@ export type KeyStatesAction = {
     payload: KeyState[];
 };
 
+type GameModeType = ActionType.UPDATE_MODE;
+
+export type ModeAction = {
+    type: GameModeType;
+    payload: ModeType;
+};
+
 export type Action = KeyEventAction | BooleanAction | GridRowDataAction | 
     GridIndexAction | InvalidGridRowDataAction | ValidGridRowDataAction |
     IncompleteBoardDataAction | KeyboardStateAction | NoPayloadAction |
-    KeyStatesAction;
+    KeyStatesAction | ModeAction;

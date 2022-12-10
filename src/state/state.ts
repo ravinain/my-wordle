@@ -1,15 +1,19 @@
 import { StorageKeys } from "../Constant";
 import { GameBoardService } from "../service/GameBoardService";
-import { GameBoardServiceType, GridIndex } from "../types/GameBoardType";
+import { ValidationService } from "../service/ValidationService";
+import { GameBoardServiceType, GridIndex, ValidationServiceType } from "../types/GameBoardType";
 import { GameRowData } from "../types/GameRowType";
+import { ModeType } from "../types/GameSettingsType";
 import { KeyEventData, KeyState, RowKeyState } from "../types/KeyboardType"
 import { StatsType } from "../types/Stats";
 
 const boardService: GameBoardServiceType = GameBoardService();
+const validationService: ValidationServiceType = ValidationService();
 
 export type GameBoardType = {
     currentBoardData: GameRowData[];
     activeGridIndex: GridIndex;
+    validWord: string;
     invalidData: boolean;
     win: boolean;
 };
@@ -22,6 +26,8 @@ export type AppStateType = {
     keyStates: KeyState[];
     stats: StatsType;
     gameOver: boolean;
+    openSettings: boolean;
+    mode: ModeType;
 }
 
 export const getDefaultEnteredKey = () => {
@@ -61,6 +67,7 @@ export const getInitialAppState = (): AppStateType => {
         gameBoardData: {
             currentBoardData: boardService.getInitialData(),
             activeGridIndex: boardService.getStartGridIndex(),
+            validWord: validationService.getValidWord(),
             invalidData: false,
             win: false
         },
@@ -74,7 +81,9 @@ export const getInitialAppState = (): AppStateType => {
             currentStreak: 0,
             distribution: [0,0,0,0,0,0]
         },
-        gameOver: false
+        gameOver: false,
+        openSettings: false,
+        mode: ModeType.EASY
     };
 };
 

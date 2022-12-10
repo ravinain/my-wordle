@@ -1,18 +1,15 @@
 import { DialogAction, DialogProps } from "../../types/DialogType";
 import { Dialog } from "../common/dialog/Dialog";
 import { IoMdRefresh } from 'react-icons/io';
-import { GameBoardDialogProps, ValidationServiceType } from "../../types/GameBoardType";
+import { GameBoardDialogProps } from "../../types/GameBoardType";
 import { useContext } from "react";
 import context from "../../state/context";
 import { ActionType } from "../../state/action";
-import { ValidationService } from "../../service/ValidationService";
-
-const validationService: ValidationServiceType = ValidationService();
 
 export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
 
     const { state, dispatch } = useContext(context);
-    const { openStats, stats, gameOver, gameBoardData:{win} } = state;
+    const { openStats, stats } = state;
     const { distribution } = stats;
 
     const header = "STATISTICS";

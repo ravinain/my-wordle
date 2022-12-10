@@ -19,6 +19,10 @@
         display: flex;
         justify-content: flex-start;
 
+        &.small {
+            height: 15rem;
+        }
+
         > * {
             width: 100%;
         }
@@ -53,6 +57,7 @@
         section {
             flex-grow: 8;
             align-self: center;
+            margin-left: 2rem;
         }
 
         footer {

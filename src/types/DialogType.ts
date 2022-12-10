@@ -1,6 +1,7 @@
 import { IconType } from "react-icons/lib";
 
 export type ActionKind = "primary" | "danger" | "secondary" | "custom";
+export type DialogSize = "small";
 
 export type DialogState = {
     open: boolean;
@@ -18,5 +19,6 @@ export type DialogProps = {
     content: JSX.Element;
     actions?: DialogAction[];
     state: DialogState;
+    dialogSize?: DialogSize;
     onClose: () => void;
 };
