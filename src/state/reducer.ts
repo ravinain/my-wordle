@@ -115,7 +115,27 @@ export const reducer = (state: AppStateType, action: Action): AppStateType => {
                 ...state,
                 keyStates: action.payload
             };
-            break
+            break;
+        case ActionType.UPDATE_MODE:
+            newState = {
+                ...getInitialAppState(),
+                mode: action.payload,
+                openSettings: true,
+                stats: state.stats
+            };
+            break;
+        case ActionType.OPEN_SETTINGS:
+            newState = {
+                ...state,
+                openSettings: true
+            };
+            break;
+        case ActionType.CLOSE_SETTINGS:
+            newState = {
+                ...state,
+                openSettings: false
+            };
+            break;
     }
 
     localStorage.setItem(StorageKeys.APP_STATE_KEY, JSON.stringify(newState));

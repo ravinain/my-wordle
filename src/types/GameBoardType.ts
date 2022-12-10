@@ -23,7 +23,7 @@ export type GridIndex = {
 };
 
 export type ValidationServiceType = {
-    validate: (rowData: GameRowData) => boolean;
+    validate: (rowData: GameRowData, validWord: string) => boolean;
     shouldValidate: (newValue: string, currentActiveIndex: GridIndex, currentRow: GameRowData) => boolean;
     getValidWord: () => string;
 };

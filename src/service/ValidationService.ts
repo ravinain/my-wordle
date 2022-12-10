@@ -1,30 +1,28 @@
 import { ENTER } from "../Constant";
+import { EASY_WORDS } from "../data/Words";
 import { GridIndex, ValidationServiceType } from "../types/GameBoardType";
 import { GameRowData } from "../types/GameRowType";
 import { GameBoardService } from "./GameBoardService";
-
-const VALID_VALUES = ["SCAPE", "THEIR", "PLACE", "MIGHT", "MONTH", "PLANT", "NIGHT"];
-const VALID_WORD = ["T", "H", "E", "I", "R"];
 
 const boardService = GameBoardService();
 
 export const ValidationService = (): ValidationServiceType => {
 
-    const validate = (rowData: GameRowData): boolean => {
+    const validate = (rowData: GameRowData, validWord: string): boolean => {
+        const validWordLetters = validWord.split("");
         const { cellData } = rowData;
         const inputWord = cellData.map(rd => rd.value).join("");
-        console.log("Input word: ", inputWord);
 
-        if (VALID_VALUES.findIndex(w => w === inputWord) === -1) {
+        if (getValidValues().findIndex(w => w === inputWord) === -1) {
             return false;
         }
 
         let win = true;
 
         cellData.forEach((rd, index) => {
-            if (VALID_WORD[index] === rd.value) {
+            if (validWordLetters[index] === rd.value) {
                 rd.valid = true;
-            } else if (VALID_WORD.indexOf(rd.value) !== -1) {
+            } else if (validWordLetters.indexOf(rd.value) !== -1) {
                 rd.partialValid = true;
             }
 
@@ -35,7 +33,7 @@ export const ValidationService = (): ValidationServiceType => {
         rowData.win = win;
 
         return true;
-    }
+    };
 
     const shouldValidate = (newValue: string, currentActiveIndex: GridIndex, 
         currentRow: GameRowData): boolean => {
@@ -46,12 +44,15 @@ export const ValidationService = (): ValidationServiceType => {
             boardService.isLastColumn(column) && 
             currentRow.cellData[column].value !== "";
 
-    }
+    };
 
     const getValidWord = (): string => {
-        return ["T", "H", "E", "I", "R"].join("");
-    }
+        return EASY_WORDS[Math.floor(Math.random()*EASY_WORDS.length)];
+    };
 
+    const getValidValues = (): string[] => {
+        return EASY_WORDS;
+    };
 
     return {
         validate,
