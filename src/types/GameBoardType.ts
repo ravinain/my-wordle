@@ -13,7 +13,7 @@ export type GameBoardServiceType = {
     getNextColumnIndex: (column: number) => number;
     getNextRowIndex: (row: number) => number;
     updateBoardData: (currentData: GameRowData[], currentGridIndex:GridIndex, value: string) => GameRowData[];
-    updateActiveIndex: (currentActiveIndex: GridIndex, value: string) => GridIndex;
+    updateActiveIndex: (currentActiveIndex: GridIndex, value: string, currentData: GameRowData[]) => GridIndex;
     updateRowData: (currentData: GameRowData[], newRowData: GameRowData, row: number) => GameRowData[];
 };
 

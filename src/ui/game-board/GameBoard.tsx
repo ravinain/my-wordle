@@ -46,13 +46,16 @@ export const GameBoard = (): JSX.Element => {
                     };
                 });
 
+                const newBoardData = boardService.updateRowData(currentBoardData, currentRow, row);
+                const newActiveGridIndex = boardService.updateActiveIndex(activeGridIndex, newValue, newBoardData);
+
                 dispatch({
                     type: ActionType.UPDATE_VALID_BOARD_DATA,
                     payload: {
                         openStats: currentRow.win || boardService.isLastRow(row),
                         win: currentRow.win,
-                        activeGridIndex: boardService.updateActiveIndex(activeGridIndex, newValue),
-                        currentBoardData: boardService.updateRowData(currentBoardData, currentRow, row),
+                        activeGridIndex: newActiveGridIndex,
+                        currentBoardData: newBoardData,
                         keyStates: newKeyStates,
                         stats: statsService.updateStats(stats, currentRow.win, row),
                         gameOver: currentRow.win || boardService.isLastRow(row)
@@ -65,10 +68,13 @@ export const GameBoard = (): JSX.Element => {
                 }});
             }
         } else {
+            const newBoardData = boardService.updateBoardData(currentBoardData, activeGridIndex, newValue);
+            const newActiveGridIndex = boardService.updateActiveIndex(activeGridIndex, newValue, newBoardData);
+
             dispatch({type: ActionType.UPDATE_INCOMPLETE_BOARD_DATA,
                 payload: {
-                    currentBoardData: boardService.updateBoardData(currentBoardData, activeGridIndex, newValue),
-                    activeGridIndex: boardService.updateActiveIndex(activeGridIndex, newValue)
+                    currentBoardData: newBoardData,
+                    activeGridIndex: newActiveGridIndex
                 }
             });
         }

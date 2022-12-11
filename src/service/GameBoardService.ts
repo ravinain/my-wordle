@@ -95,18 +95,26 @@ export const GameBoardService = (): GameBoardServiceType => {
         newData[row] = newRowData;
 
         return newData;
+    };
+
+    const hasData = (currentData: GameRowData[], row: number, column: number): boolean => {
+        return !!currentData[row].cellData[column].value;
     }
 
-    const updateActiveIndex = (currentActiveIndex: GridIndex, value: string): GridIndex => {
+    const updateActiveIndex = (currentActiveIndex: GridIndex, value: string, currentData: GameRowData[]): GridIndex => {
         let {row, column} = currentActiveIndex;
         let newValue = value.toUpperCase();
 
         switch(newValue) {
             case BACKSPACE:
-                column = getPreviousColumnIndex(column);
+                const prevColumn = getPreviousColumnIndex(column);
+                if (!hasData(currentData, row, prevColumn)) {
+                    column = prevColumn;
+                }
+
                 break;
             case ENTER:
-                if (isLastColumn(column) && !isLastRow(row)) {
+                if (isLastColumn(column) && hasData(currentData, row, column) && !isLastRow(row)) {
                     row = getNextRowIndex(row);
                     column = 0;
                 }
