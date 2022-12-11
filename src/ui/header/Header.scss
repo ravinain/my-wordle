@@ -6,17 +6,26 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0.6rem;
+    padding: 0.2rem;
     width: 100%;
     border-bottom: 1px solid b.$header-border-color;
+
+    @media only screen and (min-width: 600px) {
+        padding: 0.6rem;
+    }
+
 
     .title {
         flex-grow: 4;
         font-weight: 700;
-        font-size: 28px;
-        letter-spacing: 0.2rem;
+        font-size: 1.3rem;
+        letter-spacing: 0.1rem;
         text-transform: uppercase;
         text-align: center;
+
+        @media only screen and (min-width: 600px) {
+            letter-spacing: 0.2rem;
+        }
     }
 
     > div {

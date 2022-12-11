@@ -14,10 +14,14 @@
         color: b.$dialog-container-color;
         box-shadow: 2px 2px 15px 4px b.$dialog-container-bg-color;
         border-radius: 1rem;
-        width: 26rem;
+        width: 19rem;
         height: 30rem;
         display: flex;
         justify-content: flex-start;
+
+        @media only screen and (min-width: 600px) {
+            width: 26rem;
+        }
 
         &.small {
             height: 15rem;
@@ -50,14 +54,22 @@
             .title {
                 align-self: center;
                 font-weight: 700;
-                font-size: x-large;
+                font-size: larger;
+
+                @media only screen and (min-width: 600px) {
+                    font-size: x-large;
+                }
             }
         }
 
         section {
             flex-grow: 8;
             align-self: center;
-            margin-left: 2rem;
+            margin-left: 1rem;
+
+            @media only screen and (min-width: 600px) {
+                margin-left: 2rem;
+            }
         }
 
         footer {
