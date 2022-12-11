@@ -38,7 +38,7 @@ export const Header = (): JSX.Element => {
                 <GameSettings />
             }
             <header className="app-header">
-                <div className="title">{title}</div>
+                <div className="title no-select">{title}</div>
                 <div>{stats()}</div>
                 <div>{settings()}</div>
             </header>

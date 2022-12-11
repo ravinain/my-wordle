@@ -5,7 +5,7 @@ export const GameCell = (props: CellTypeProps): JSX.Element => {
     const {data, validated, column} = props;
 
     const getCellClass = ():string => {
-        const classes = ["game-cell"];
+        const classes = ["game-cell", "no-select"];
 
         if (validated) {
             classes.push("flip");

@@ -62,8 +62,8 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
                             distribution.map((data, index) => {
                                 return (
                                     <div className="row">
-                                        <label>{ index + 1 }</label>
-                                        <label className={"bar " + (stats.lastWinAttempt === index ? "highlight" : "" )} style={{width: getWidth(data)}}>{data}</label>
+                                        <label className="no-select">{ index + 1 }</label>
+                                        <label className={"bar no-select " + (stats.lastWinAttempt === index ? "highlight" : "" )} style={{width: getWidth(data)}}>{data}</label>
                                     </div>
                                 );
                             })

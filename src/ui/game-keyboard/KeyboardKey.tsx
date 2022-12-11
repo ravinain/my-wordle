@@ -26,7 +26,7 @@ export const KeyboardKey = (props:KeyboardKeyProps): JSX.Element => {
     }
 
     return (
-        <div className={"keyboard-key " + getClasses()} onClick={onKeyClick}>
+        <div className={"keyboard-key no-select " + getClasses()} onClick={onKeyClick}>
             {keyState.value}
         </div>
     );

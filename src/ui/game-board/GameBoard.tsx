@@ -92,7 +92,7 @@ export const GameBoard = (): JSX.Element => {
         <div className="game-board">
             {
                 gameOver && !win &&
-                <div className="word">
+                <div className="word no-select">
                     {validWord}
                 </div>
             }

@@ -43,8 +43,8 @@ export const Dialog = (props: DialogProps): JSX.Element => {
         <dialog open className="dialog">
             <div className={getContainerClasses()}>
                 <header>
-                    <button className="close-btn" onClick={onClose}>X</button>
-                    <div className="title">{props.header}</div>
+                    <button className="close-btn no-select" onClick={onClose}>X</button>
+                    <div className="title no-select">{props.header}</div>
                 </header>
                 <section>
                     {content}

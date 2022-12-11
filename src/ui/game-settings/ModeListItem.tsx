@@ -12,8 +12,18 @@ export const ModeListItem = (props: ModeListProps): JSX.Element => {
         return value === selectedValue;
     };
 
+    const getClasses = (): string => {
+        const classes = ["no-select"];
+
+        if (isSelected()) {
+            classes.push("selected");
+        }
+
+        return classes.join(" ");
+    }
+
     return (
-        <li key={value} className={isSelected() ? "selected" : ""} onClick={onItemClick}>{label.toLowerCase()}</li>
+        <li key={value} className={getClasses()} onClick={onItemClick}>{label.toLowerCase()}</li>
     );
 
 };
