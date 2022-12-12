@@ -12,7 +12,6 @@ import { ActionType } from '../../state/action';
 import { StatsServiceType } from '../../types/Stats';
 import { StatsService } from '../../service/StatsService';
 
-
 const boardService: GameBoardServiceType = GameBoardService();
 const validationService: ValidationServiceType = ValidationService();
 const statsService: StatsServiceType = StatsService();
@@ -27,7 +26,7 @@ export const GameBoard = (): JSX.Element => {
             const shakeRow = invalidData &&
             a === row && 
             !currentBoardData[a].validated;
-            return <GameRow key={`row_${a}`} rowData={currentBoardData[a]} shake={shakeRow} />;
+            return <GameRow rowData={currentBoardData[a]} shake={shakeRow} />;
         });
     }, [currentBoardData, invalidData]);
 

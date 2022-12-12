@@ -6,6 +6,7 @@ import context from '../../state/context';
 import { ModeListChange, ModeType } from '../../types/GameSettingsType';
 import { ModeListItem } from './ModeListItem';
 import { ActionType } from '../../state/action';
+import uuid from 'react-uuid';
 
 const modes = [ModeType.EASY, ModeType.MEDIUM, ModeType.DIFFICULT];
 
@@ -49,7 +50,7 @@ export const GameSettings = (): JSX.Element => {
     };
 
     return (
-        <Dialog {...dialogProps} />
+        <Dialog key={uuid()} {...dialogProps} />
     );
 
 };

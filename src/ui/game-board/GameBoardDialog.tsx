@@ -5,6 +5,7 @@ import { GameBoardDialogProps } from "../../types/GameBoardType";
 import { useContext } from "react";
 import context from "../../state/context";
 import { ActionType } from "../../state/action";
+import uuid from "react-uuid";
 
 export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
 
@@ -61,9 +62,11 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
                         {
                             distribution.map((data, index) => {
                                 return (
-                                    <div className="row">
+                                    <div className="row" key={uuid()}>
                                         <label className="no-select">{ index + 1 }</label>
-                                        <label className={"bar no-select " + (stats.lastWinAttempt === index ? "highlight" : "" )} style={{width: getWidth(data)}}>{data}</label>
+                                        <span className="bar">
+                                            <label className={"no-select " + (stats.lastWinAttempt === index ? "highlight" : "" )} style={{width: getWidth(data)}}>{data}</label>
+                                        </span>
                                     </div>
                                 );
                             })
@@ -96,7 +99,7 @@ export const GameBoardDialog = (props: GameBoardDialogProps): JSX.Element => {
     };
 
     return (
-        <Dialog {...dialogProps} />
+        <Dialog key={uuid()} {...dialogProps} />
     );
 
 };

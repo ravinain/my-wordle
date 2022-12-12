@@ -69,22 +69,27 @@
     
     .row {
         margin: 0.5rem 0;
+        display: flex;
     }
 
     .bar {
-        padding: 0.1rem 0.2rem;
-        background-color: b.$stat-bar-bg-color;
-        margin-left: 0.2rem;
-        display: inline-block;
-        text-align: right;
-        min-width: fit-content;
+        width: 80%;
 
-        @media only screen and (min-width: 600px) {
-            margin-left: 0.3rem;
-        }
-
-        &.highlight {
-            background-color: b.$stat-bar-hl-color;
+        label {
+            padding: 0.1rem 0.2rem;
+            background-color: b.$stat-bar-bg-color;
+            margin-left: 0.2rem;
+            display: inline-block;
+            text-align: right;
+            min-width: fit-content;
+    
+            @media only screen and (min-width: 600px) {
+                margin-left: 0.3rem;
+            }
+    
+            &.highlight {
+                background-color: b.$stat-bar-hl-color;
+            }
         }
     }
 }

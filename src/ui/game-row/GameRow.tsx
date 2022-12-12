@@ -20,7 +20,7 @@ export const GameRow = (props: GameRowProps): JSX.Element => {
         <div className={getRowClass()}>
             {
                 [...Array(WORD_SIZE).keys()]
-                .map((w, i) => <GameCell key={`row_col_${i}`} data={cellData[w]} validated={validated} column={i} />)
+                .map((w, i) => <GameCell data={cellData[w]} validated={validated} column={i} />)
             }
         </div>
     );
